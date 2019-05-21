@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": [
+      "es2015", "dom"
+    ],
+    "target": "es5",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "files": [
+    "../test/nickTest.ts",
+    "../test/Test.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+
+/*
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "target": "es5",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "files": [
+    "jeszczeNieWiemCo.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+*/

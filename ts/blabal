@@ -1,0 +1,73 @@
+
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 5,
+          "buy_price": 100,
+          "sell_price": 200
+        },
+        "Piasek": {
+          "available": 5,
+          "buy_price": 90,
+          "sell_price": 100
+        },
+        "Ziemniaki": {
+          "available": 5,
+          "buy_price": 500,
+          "sell_price": 520
+        },
+
+      }
+        "Złoto": {
+              "available": 5,
+              "buy_price":  500,
+              "sell_price": 600
+            }
+"Złoto": {
+"available": 5,
+"buy_price":  500,
+"sell_price": 600
+}
+
+"Nuka-Cola": {
+
+"available": 600,
+"buy_price": 25,
+"sell_price": 50
+
+},
+"Piasek": {
+"available": 100,
+"buy_price": 90,
+"sell_price": 100
+},
+"Ziemniaki": {
+"available": 10,
+"buy_price": 400,
+"sell_price": 520
+},
+"Złoto": {
+"available": 0,
+"buy_price":  200,
+"sell_price": 250
+}
+"Złoto": {
+"available": 100000,
+"buy_price":  50,
+"sell_price": 75
+}
+"Złoto": {
+"available": 350,
+"buy_price":  60,
+"sell_price": 70
+}
+
+"Złoto": {
+"available": 3000,
+"buy_price":  60,
+"sell_price": 120
+}
+"available": 3000,
+"buy_price":  600,
+"sell_price":
+
+

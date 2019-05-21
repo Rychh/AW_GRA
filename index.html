@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/index.css">
+  <title>CTS Menu</title>
+</head>
+<body>
+<div class="lightbox" id="popup_name">
+  <figure>
+    <a href="#" class="close"></a>
+    <figcaption>
+      <h2>What's your cosmos trading name?</h2>
+      <input type="text" id="nickname" name="nick" value="Nick">
+      <button onclick="saveNickname()" id="submitButton">Submit</button>
+    </figcaption>
+  </figure>
+</div>
+
+<div class="cointeiner">
+  <header class="header">
+    <h1>Welcome to
+      <strong>Space Trade Contest</strong>
+    </h1>
+    <div class="logo">
+      <img src="img/logo.jpg" alt="logo">
+    </div>
+  </header>
+
+  <main class="main">
+    <a id="button" href="#popup_name"> New Game</a>
+    <p>Best Score</p>
+    <table>
+      <thead>
+      <tr>
+        <th>Nr</th>
+        <th>Nick</th>
+        <th>Score</th>
+        <th>Date</th>
+      </tr>
+
+      </thead>
+      <tbody>
+      <tr>
+        <td>1.</td>
+        <td>Ciebie</td>
+        <td>999</td>
+        <td>10.10.2064</td>
+      </tr>
+
+      <tr>
+        <td>2.</td>
+        <td>Skiba</td>
+        <td>420</td>
+        <td>06.04.2019</td>
+      </tr>
+
+      <tr>
+        <td>3.</td>
+        <td>Pieczara</td>
+        <td>69</td>
+        <td>03.05.2018</td>
+      </tr>
+
+      <tr>
+        <td>4.</td>
+        <td>Malinowski</td>
+        <td>42</td>
+        <td>01.06.2018</td>
+      </tr>
+      </tbody>
+    </table>
+  </main>
+  <footer class="footer">
+    made by mr394723
+  </footer>
+</div>
+<script src="ts/index.js"></script>
+
+</body>
+</html>

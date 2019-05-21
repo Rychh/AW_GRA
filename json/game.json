@@ -1,0 +1,514 @@
+{
+  "items": [
+    "Nuka-Cola",
+    "Piasek",
+    "Ziemniaki",
+    "Złoto"
+  ],
+  "planets": {
+    "Ziemia": {
+      "x": 10,
+      "y": 10,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 5000,
+          "buy_price": 40,
+          "sell_price": 100
+        },
+        "Piasek": {
+          "available": 0,
+          "buy_price": 44,
+          "sell_price": 32
+        },
+        "Ziemniaki": {
+          "available": 30000,
+          "buy_price": 2900,
+          "sell_price": 1500
+        },
+        "Złoto": {
+          "available": 20,
+          "buy_price": 399,
+          "sell_price": 199
+        }
+      }
+    },
+    "Mars": {
+      "x": 30,
+      "y": 10,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 200,
+          "buy_price": 45,
+          "sell_price": 90
+        },
+        "Piasek": {
+          "available": 100,
+          "buy_price": 30,
+          "sell_price": 29
+        },
+        "Ziemniaki": {
+          "available": 150,
+          "buy_price": 100,
+          "sell_price": 110
+        },
+        "Złoto": {
+          "available": 43,
+          "buy_price": 500,
+          "sell_price": 400
+        }
+      }
+    },
+    "nowy Radom": {
+      "x": 25,
+      "y": 75,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 0,
+          "buy_price": 30,
+          "sell_price": 90
+        },
+        "Piasek": {
+          "available": 1000000,
+          "buy_price": 10,
+          "sell_price": 15
+        },
+        "Ziemniaki": {
+          "available": 3000,
+          "buy_price": 50,
+          "sell_price": 60
+        },
+        "Złoto": {
+          "available": 0,
+          "buy_price": 1000,
+          "sell_price": 0
+        }
+      }
+    },
+    "Tleilax": {
+      "x": 90,
+      "y": 90,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 900,
+          "buy_price": 45,
+          "sell_price": 50
+        },
+        "Piasek": {
+          "available": 10,
+          "buy_price": 30,
+          "sell_price": 45
+        },
+        "Ziemniaki": {
+          "available": 30,
+          "buy_price": 100,
+          "sell_price": 120
+        },
+        "Złoto": {
+          "available": 1000,
+          "buy_price": 100,
+          "sell_price": 200
+        }
+      }
+    },
+    "Arrakis": {
+      "x": 95,
+      "y": 95,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 5,
+          "buy_price": 100,
+          "sell_price": 200
+        },
+        "Piasek": {
+          "available": 5,
+          "buy_price": 90,
+          "sell_price": 100
+        },
+        "Ziemniaki": {
+          "available": 5,
+          "buy_price": 500,
+          "sell_price": 520
+        },
+        "Złoto": {
+          "available": 5,
+          "buy_price": 500,
+          "sell_price": 600
+        }
+      }
+    },
+    "Seteveder": {
+      "x": 70,
+      "y": 80,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 10,
+          "buy_price": 400,
+          "sell_price": 520
+        },
+        "Piasek": {
+          "available": 0,
+          "buy_price": 200,
+          "sell_price": 250
+        },
+        "Ziemniaki": {
+          "available": 100000,
+          "buy_price": 50,
+          "sell_price": 75
+        },
+        "Złoto": {
+          "available": 5,
+          "buy_price": 500,
+          "sell_price": 600
+        }
+      }
+    },
+    "Kaitain": {
+      "x": 80,
+      "y": 20,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 10,
+          "buy_price": 400,
+          "sell_price": 520
+        },
+        "Piasek": {
+          "available": 100,
+          "buy_price": 90,
+          "sell_price": 100
+        },
+        "Ziemniaki": {
+          "available": 3000,
+          "buy_price": 60,
+          "sell_price": 120
+        },
+        "Złoto": {
+          "available": 10,
+          "buy_price": 400,
+          "sell_price": 520
+        }
+      }
+    },
+    "Krikkit": {
+      "x": 65,
+      "y": 30,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 350,
+          "buy_price": 60,
+          "sell_price": 70
+        },
+        "Piasek": {
+          "available": 100,
+          "buy_price": 90,
+          "sell_price": 100
+        },
+        "Ziemniaki": {
+          "available": 10,
+          "buy_price": 400,
+          "sell_price": 520
+        },
+        "Złoto": {
+          "available": 5,
+          "buy_price": 500,
+          "sell_price": 600
+        }
+      }
+    },
+    "Golgafrincham": {
+      "x": 50,
+      "y": 55,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 350,
+          "buy_price": 60,
+          "sell_price": 70
+        },
+        "Piasek": {
+          "available": 100,
+          "buy_price": 90,
+          "sell_price": 100
+        },
+        "Ziemniaki": {
+          "available": 100000,
+          "buy_price": 50,
+          "sell_price": 75
+        },
+        "Złoto": {
+          "available": 10,
+          "buy_price": 400,
+          "sell_price": 520
+        }
+      }
+    },
+    "Traal": {
+      "x": 32,
+      "y": 45,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 100000,
+          "buy_price": 50,
+          "sell_price": 75
+        },
+        "Piasek": {
+          "available": 0,
+          "buy_price": 200,
+          "sell_price": 250
+        },
+        "Ziemniaki": {
+          "available": 3000,
+          "buy_price": 60,
+          "sell_price": 120
+        },
+        "Złoto": {
+          "available": 5,
+          "buy_price": 500,
+          "sell_price": 600
+        }
+      }
+    },
+    "Vogsphere": {
+      "x": 20,
+      "y": 90,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 100000,
+          "buy_price": 50,
+          "sell_price": 75
+        },
+        "Piasek": {
+          "available": 100,
+          "buy_price": 90,
+          "sell_price": 100
+        },
+        "Ziemniaki": {
+          "available": 100,
+          "buy_price": 90,
+          "sell_price": 100
+        },
+        "Złoto": {
+          "available": 10,
+          "buy_price": 400,
+          "sell_price": 520
+        }
+      }
+    },
+    "Palaven": {
+      "x": 30,
+      "y": 40,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 350,
+          "buy_price": 60,
+          "sell_price": 70
+        },
+        "Piasek": {
+          "available": 100,
+          "buy_price": 90,
+          "sell_price": 100
+        },
+        "Ziemniaki": {
+          "available": 3000,
+          "buy_price": 60,
+          "sell_price": 120
+        },
+        "Złoto": {
+          "available": 10,
+          "buy_price": 400,
+          "sell_price": 520
+        }
+      }
+    },
+    "Rannoch": {
+      "x": 5,
+      "y": 64,
+      "available_items": {
+        "Nuka-Cola": {
+          "available": 100000,
+          "buy_price": 50,
+          "sell_price": 75
+        },
+        "Piasek": {
+          "available": 100,
+          "buy_price": 90,
+          "sell_price": 100
+        },
+        "Ziemniaki": {
+          "available": 0,
+          "buy_price": 200,
+          "sell_price": 250
+        },
+        "Złoto": {
+          "available": 0,
+          "buy_price": 200,
+          "sell_price": 250
+        }
+      }
+    }
+  },
+  "starships": {
+    "Rocinante": {
+      "x": 65,
+      "y": 30,
+      "timer": 0,
+      "inTheSpace": false,
+      "position": "Kaitain",
+      "cargo_hold_size": 250,
+      "current_capacity": 40,
+      "items": {
+        "Nuka-Cola": {
+          "available": 10
+        },
+        "Piasek": {
+          "available": 0
+        },
+        "Ziemniaki": {
+          "available": 20
+        },
+        "Złoto": {
+          "available": 10
+        }
+      }
+    },
+    "USSR Enterprise ": {
+      "x": 50,
+      "y": 55,
+      "timer": 0,
+      "inTheSpace": false,
+      "position": "Golgafrincham",
+      "cargo_hold_size": 1000,
+      "current_capacity": 120,
+      "items": {
+        "Nuka-Cola": {
+          "available": 0
+        },
+        "Piasek": {
+          "available": 100
+        },
+        "Ziemniaki": {
+          "available": 20
+        },
+        "Złoto": {
+          "available": 0
+        }
+      }
+    },
+    "Normandy": {
+      "x": 32,
+      "y": 45,
+      "timer": 0,
+      "inTheSpace": false,
+      "position": "Traal",
+      "cargo_hold_size": 300,
+      "current_capacity": 300,
+      "items": {
+        "Nuka-Cola": {
+          "available": 300
+        },
+        "Piasek": {
+          "available": 0
+        },
+        "Ziemniaki": {
+          "available": 0
+        },
+        "Złoto": {
+          "available": 0
+        }
+      }
+    },
+    "Maja": {
+      "x": 30,
+      "y": 10,
+      "timer": 0,
+      "inTheSpace": false,
+      "position": "Mars",
+      "cargo_hold_size": 200,
+      "current_capacity": 200,
+      "items": {
+        "Nuka-Cola": {
+          "available": 0
+        },
+        "Piasek": {
+          "available": 0
+        },
+        "Ziemniaki": {
+          "available": 0
+        },
+        "Złoto": {
+          "available": 200
+        }
+      }
+    },
+
+    "Meganeura": {
+      "x": 10,
+      "y": 10,
+      "timer": 0,
+      "inTheSpace": false,
+      "position": "Ziemia",
+      "cargo_hold_size": 120,
+      "current_capacity": 30,
+      "items": {
+        "Nuka-Cola": {
+          "available": 0
+        },
+        "Piasek": {
+          "available": 0
+        },
+        "Ziemniaki": {
+          "available": 0
+        },
+        "Złoto": {
+          "available": 30
+        }
+      }
+    },
+    "Deneris na smoku": {
+      "x": 10,
+      "y": 10,
+      "timer": 0,
+      "inTheSpace": false,
+      "position": "Ziemia",
+      "cargo_hold_size": 150,
+      "current_capacity": 100,
+      "items": {
+        "Nuka-Cola": {
+          "available": 100
+        },
+        "Piasek": {
+          "available": 0
+        },
+        "Ziemniaki": {
+          "available": 0
+        },
+        "Złoto": {
+          "available": 0
+        }
+      }
+    },
+    "Heart og Gold": {
+      "x": 10,
+      "y": 10,
+      "timer": 0,
+      "inTheSpace": false,
+      "position": "Ziemia",
+      "cargo_hold_size": 140,
+      "current_capacity": 5,
+      "items": {
+        "Nuka-Cola": {
+          "available": 0
+        },
+        "Piasek": {
+          "available": 0
+        },
+        "Ziemniaki": {
+          "available": 5
+        },
+        "Złoto": {
+          "available": 0
+        }
+      }
+    }
+  },
+  "game_duration": 120,
+  "initial_credits": 1
+}

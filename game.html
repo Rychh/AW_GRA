@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/main.css">
+  <title>Space Trade Contest</title>
+</head>
+<body>
+<div class="cointeiner">
+  <header class="header">
+
+    <!--    <h1 >Nick  </h1>-->
+    <!--    <p class="information">Stan Konta: ${game.initial_credits} R </p>-->
+    <!--    <p class="information">Czas:  ${this.time} s</p>-->
+    <game.main.header></game.main.header>
+  </header>
+  <main class="main">
+    <game.main.left></game.main.left>
+  </main>
+
+  <nav class="navigation">
+    <game.main.right></game.main.right>
+  </nav>
+  <footer class="footer">
+    <game.main.map></game.main.map>
+    <!--
+        <svg width="300" height="300" style="background-color:#000000">
+          <circle cx="0" cy="0" r="10" stroke="red" stroke-width="4" fill="yellow" />
+          <circle cx="100" cy="50%" r="10" stroke="green" stroke-width="4" fill="yellow" />
+          <circle cx="100%" cy="100" r="10" stroke="blue" stroke-width="4" fill="yellow" />
+        </svg>
+    -->
+    <!--  <h4> © 2019 <a href="  https://usosweb.mimuw.edu.pl/kontroler.php?_action=katalog2/osoby/pokazOsobe&os_id=342097
+  ">Rychh</a>  &lt;!&ndash;
+        &ndash;&gt;<a href="https://www.facebook.com/CiaPtak"> Kontakt</a>  &lt;!&ndash;
+        &ndash;&gt;<a href="https://pl.wikipedia.org/wiki/Ochrona_danych_osobowych">Ochrona danych osobowych</a></h4>
+    -->
+  </footer>
+  <script src="js/main.js"></script>
+</div>
+
+<div class="lightbox" id="popup">
+  <figure>
+    <a href="#" class="close"></a>
+    <figcaption>
+      <div class="popup_cointeiner">
+        <header class="header">
+          <game.popup.header></game.popup.header>
+        </header>
+        <main class="main">
+          <game.popup.left></game.popup.left>
+        </main>
+        <nav class="navigation">
+          <game.popup.right></game.popup.right>
+        </nav>
+      </div>
+    </figcaption>
+  </figure>
+</div>
+
+<script src="ts/interpreter.js"></script>
+
+</body>
+</html>
