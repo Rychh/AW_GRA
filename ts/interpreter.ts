@@ -2,6 +2,8 @@
 // import * as data1 from './example.json';
 
 
+import {reset} from "ansi-colors";
+
 interface ItemPlanet {
   available: number;
   buy_price: number;
@@ -805,7 +807,7 @@ function checkTheCorrectness(planetName: string, planet: Planet, shipName: strin
 function changeValue(planet: Planet, ship: Ship, items: string[], balance: number[]): number {
   let money = 0;
   for (let i = 0; i < balance.length; i++) {
-    let item = gameTrick.items[i];
+    let item = items[i];
     planet.available_items[item].available -= balance[i];
     ship.items[item].available += balance[i];
     ship.current_capacity += balance[i];
@@ -919,11 +921,15 @@ abstract class LogicalTest {
     this.name = name;
     this.planetName = "TestPlanet_" + this.id;
     this.shipName = "TestShip_" + this.id;
+    this.reset();
+  }
+
+  reset() {
     this.items = [];
     this.items.push(item);
     this.planet = new PlanetClass(item);
     this.ship = new ShipClass(item, this.planetName);
-    this.balance[item] = 0;
+    this.balance[0] = 0;
   }
 
   abstract test();
@@ -964,7 +970,7 @@ class TestBrakZiemniakow extends LogicalTest {
 
   test() {
     let item = "Ziemniak";
-
+    this.reset();
     try {
       checkTheCorrectness(this.planetName, this.planet,
         this.shipName, this.ship, this.items, this.balance, 0);
@@ -972,34 +978,38 @@ class TestBrakZiemniakow extends LogicalTest {
       throw new Error("Pusty test" + e);
     }
 
+    this.reset();
     this.ship.cargo_hold_size = 1;
-    this.balance[item] = 1;
-
+    this.balance[0] = 1;
     try {
       checkTheCorrectness(this.planetName, this.planet,
         this.shipName, this.ship, this.items, this.balance, 0);
       throw new Error("Nie powinno być możliwości kupna");
     } catch (e) {
-      if (this.errorMessagePlanet(item) != e) {
+      if (this.errorMessagePlanet(item) != e.message) {
         throw new Error("Inny error1" + e);
       }
     }
 
-    this.balance[item] = -1;
+    this.reset();
+    this.balance[0] = -1;
 
     try {
       checkTheCorrectness(this.planetName, this.planet,
         this.shipName, this.ship, this.items, this.balance, 0);
       throw new Error("Nie powinno być możliwości sprzedaży");
     } catch (e) {
-      if (this.errorMessageShip(item) != e) {
-        throw new Error("Inny error2 " + e);
+      if (this.errorMessageShip(item) != e.message) {
+        console.log(this.errorMessageShip(item));
+        console.log(e.message);
+        throw new Error("Inny error2 " + e.message);
       }
     }
 
     this.ship.items[item].available = 1;
     this.ship.current_capacity = 1;
     this.planet.available_items[item].sell_price = 1;
+    this.planet.available_items[item].available = 0;
 
     try {
       checkTheCorrectness(this.planetName, this.planet,
@@ -1013,7 +1023,7 @@ class TestBrakZiemniakow extends LogicalTest {
       if(this.ship.current_capacity != 0)
         throw new Error("Statek nie powinien nic miec");
 
-      if (this.planet.available_items[item].available != 0)
+      if (this.planet.available_items[item].available == 0)
         throw new Error("Na planecie powinno byc wiece itemow");
 
     } catch (e) {
@@ -1039,7 +1049,7 @@ class TestBrakHajsow extends LogicalTest {
       throw new Error("Pusty test" + e);
     }
 
-    this.balance[item] = 1;
+    this.balance[0] = 1;
     this.ship.cargo_hold_size = 1;
     this.planet.available_items[item].buy_price = 1;
     this.planet.available_items[item].available = 1;
@@ -1048,7 +1058,7 @@ class TestBrakHajsow extends LogicalTest {
       checkTheCorrectness(this.planetName, this.planet,
         this.shipName, this.ship, this.items, this.balance, 0);
     } catch (e) {
-      if (this.errorMessageMoney(-1) != e) {
+      if (this.errorMessageMoney(-1) != e.message) {
         throw new Error("Inny error1" + e);
       }
     }
@@ -1059,9 +1069,18 @@ class TestBrakHajsow extends LogicalTest {
       checkTheCorrectness(this.planetName, this.planet,
         this.shipName, this.ship, this.items, this.balance, 0);
     } catch (e) {
-      if (this.errorMessageShip(item) != e) {
+      if (this.errorMessageShip(item) != e.message) {
         throw new Error("Inny error2 " + e);
       }
     }
   }
 }
+
+let testZiemniak = new TestBrakZiemniakow();
+let testBrakHajsu = new TestBrakHajsow();
+
+function testowanko() {
+  for(let i = 1; i <= testNextId; i++)
+    tests[i].test();
+}
+
