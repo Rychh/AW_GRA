@@ -2,8 +2,6 @@
 // import * as data1 from './example.json';
 
 
-import {reset} from "ansi-colors";
-
 interface ItemPlanet {
   available: number;
   buy_price: number;
@@ -143,7 +141,7 @@ class GameMain extends Component {
     if (game.game_duration - this.time > 0) {
       return `
     <h1 id="nicknameHeader"> ${nickname} </h1>
-    <p class="information">Stan Konta: ${game.initial_credits} R </p>
+    <p id="konto">Stan Konta: ${game.initial_credits} R </p>
     <p>Czas:  ${game.game_duration - this.time} s</p>
 `;
     } else {
@@ -381,7 +379,7 @@ class GamePopupPlanet extends GamePopup {
   generateRightRow(ship: Ship, name: string): string {
     return `
      <tr>
-        <td><a href="#popup" onclick="gamePopupShip.openPopup('${name}')">${name}</a></td>
+        <td><a id="${name}Link"  href="#popup" onclick="gamePopupShip.openPopup('${name}')">${name}</a></td>
         <td>${ship.current_capacity}/${ship.cargo_hold_size}</td>
       </tr>
     `
@@ -696,7 +694,6 @@ function timeUpdate(game: Game) {
       }
     })
   }
-
 }
 
 
@@ -743,7 +740,7 @@ function dzik(game: Game): void {
   oneSecUpdate(game);
 }
 
-fetch("../json/game.json")
+fetch("/home/rychh/Desktop/AW_GRA/json/game.json")
   .then(function (resp) {
     return resp.json();
   }).then(function (json) {
@@ -797,7 +794,7 @@ function checkTheCorrectness(planetName: string, planet: Planet, shipName: strin
     newCap += balance[i] + ship.items[item].available;
   }
 
-  if (+money < 0)
+  if (base + money < 0)
     throw new Error("You don't have enough money. You need " + money + " R more.");
 
   if (newCap > ship.cargo_hold_size)
@@ -921,10 +918,6 @@ abstract class LogicalTest {
     this.name = name;
     this.planetName = "TestPlanet_" + this.id;
     this.shipName = "TestShip_" + this.id;
-    this.reset();
-  }
-
-  reset() {
     this.items = [];
     this.items.push(item);
     this.planet = new PlanetClass(item);
@@ -970,7 +963,7 @@ class TestBrakZiemniakow extends LogicalTest {
 
   test() {
     let item = "Ziemniak";
-    this.reset();
+
     try {
       checkTheCorrectness(this.planetName, this.planet,
         this.shipName, this.ship, this.items, this.balance, 0);
@@ -978,7 +971,6 @@ class TestBrakZiemniakow extends LogicalTest {
       throw new Error("Pusty test" + e);
     }
 
-    this.reset();
     this.ship.cargo_hold_size = 1;
     this.balance[0] = 1;
     try {
@@ -991,7 +983,6 @@ class TestBrakZiemniakow extends LogicalTest {
       }
     }
 
-    this.reset();
     this.balance[0] = -1;
 
     try {
@@ -1063,14 +1054,32 @@ class TestBrakHajsow extends LogicalTest {
       }
     }
 
-    this.ship.items[item].available = -1;
+    this.balance[0] = -1;
 
     try {
       checkTheCorrectness(this.planetName, this.planet,
         this.shipName, this.ship, this.items, this.balance, 0);
     } catch (e) {
       if (this.errorMessageShip(item) != e.message) {
+        console.log("Cs");
         throw new Error("Inny error2 " + e);
+      }
+    }
+
+    this.ship.cargo_hold_size = 1;
+    this.ship.current_capacity = 1;
+    this.balance[0] = 1;
+    this.planet.available_items[item].buy_price = 1;
+    this.planet.available_items[item].available = 1;
+
+
+    try {
+      checkTheCorrectness(this.planetName, this.planet,
+        this.shipName, this.ship, this.items, this.balance, 1);
+    } catch (e) {
+      if (this.errorMessageCap() != e.message) {
+        console.log("Cs");
+        throw new Error("Inny error3 " + e);
       }
     }
   }
@@ -1081,6 +1090,6 @@ let testBrakHajsu = new TestBrakHajsow();
 
 function testowanko() {
   for(let i = 1; i <= testNextId; i++)
-    tests[i].test();
+    tests[i].start();
 }
 
