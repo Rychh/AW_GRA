@@ -1,14 +1,11 @@
-/*const express = require('express')
-const app = express()
-const port = 3000
+import express = require('express');
 
-app.get('/', (req, res) => res.send('Hello World!'))
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))*/
-
-import {Express} from "express";
-
-const server = Express.express()
+const server = express()
 const PORT = 3112
+import * as path from "path"
 
+// ROUTES
+server.use(express.static(path.join(__dirname, '..')))
+
+// SERVER SETUP
 server.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
