@@ -17,6 +17,19 @@
   </figure>
 </div>
 
+<div class="lightbox" id="popup_map">
+  <figure>
+    <a href="#" class="close"></a>
+    <figcaption>
+      <h2>Choose map</h2>
+      <select id="select_map" name="map_name" size="6">
+      </select>
+      <div id="map_description">
+      </div>
+    </figcaption>
+  </figure>
+</div>
+
 <div class="cointeiner">
   <header class="header">
     <h1>Welcome to
@@ -28,46 +41,19 @@
   </header>
 
   <main class="main">
-    <a id="button" href="#popup_name"> New Game</a>
-    <p>Best Score</p>
+    <a class="button" href="#popup_name"> New Game</a>
+    <a class="button" href="#popup_map"> Chose Map</a>
+    <h4 id="map_name"> Map_name</h4>
+    <h4>Best Score</h4>
     <table>
       <thead>
       <tr>
         <th>Nr</th>
         <th>Nick</th>
         <th>Score</th>
-        <th>Date</th>
       </tr>
-
       </thead>
-      <tbody>
-      <tr>
-        <td>1.</td>
-        <td>Ciebie</td>
-        <td>999</td>
-        <td>10.10.2064</td>
-      </tr>
-
-      <tr>
-        <td>2.</td>
-        <td>Skiba</td>
-        <td>420</td>
-        <td>06.04.2019</td>
-      </tr>
-
-      <tr>
-        <td>3.</td>
-        <td>Pieczara</td>
-        <td>69</td>
-        <td>03.05.2018</td>
-      </tr>
-
-      <tr>
-        <td>4.</td>
-        <td>Malinowski</td>
-        <td>42</td>
-        <td>01.06.2018</td>
-      </tr>
+      <tbody id="tbody_score">
       </tbody>
     </table>
   </main>

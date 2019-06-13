@@ -510,5 +510,7 @@
     }
   },
   "game_duration": 120,
+  "game_time": 0,
+  "game_run": true,
   "initial_credits": 1
 }
