@@ -45,6 +45,8 @@ interface Game {
   }
 
   game_duration: number;
+  game_time: number;
+  game_run: boolean;
   initial_credits: number;
 }
 
@@ -76,8 +78,8 @@ interface IComponent {
 let mapComSecond: { [id: string]: IComponent } = {};
 let mapComOnClick: { [id: string]: IComponent } = {};
 let nextId = 0;
-let gameRun: boolean = true;
 let gameTrick: Game;
+let pageTime = 0;
 
 // let game : Game;
 
@@ -127,22 +129,20 @@ abstract class Component implements IComponent {
 
 class GameMain extends Component {
   divMap: string;
-  time: number;
 
   constructor() {
     super(true, 'game.main.header', 'game.main.left', 'game.main.right');
     this.divMap = 'game.main.map'
-    this.time = 0;
   }
 
   renderHeader(game: Game): string {
     let nickname = window.localStorage.getItem("nickname");
 
-    if (game.game_duration - this.time > 0) {
+    if (game.game_duration - game.game_time > 0) {
       return `
     <h1 id="nicknameHeader"> ${nickname} </h1>
     <p id="konto">Stan Konta: ${game.initial_credits} R </p>
-    <p>Czas:  ${game.game_duration - this.time} s</p>
+    <p>Czas:  ${game.game_duration - game.game_time} s</p>
 `;
     } else {
       return `
@@ -309,7 +309,7 @@ abstract class GamePopup extends Component {
   }
 
   openPopup(name: string): void {
-    if (gameRun) {
+    if (gameTrick.game_run) {
       Object.keys(mapComSecond).forEach(key => {
         if (mapComSecond[key] instanceof GamePopup)
           mapComSecond[key].open = false;
@@ -673,27 +673,58 @@ let gamePopupGameOver = new GamePopupGameOver();
 
 // Increase or decrease every timer
 function timeUpdate(game: Game) {
-  if (gameRun) {
-    gameMain.time++;
-    if (gameTrick.game_duration <= gameMain.time) {
+  if (game.game_run) {
+    pageTime++;
+    game.game_time++;
+    if (gameTrick.game_duration <= game.game_time) {
       gamePopupGameOver.openPopup('');
-      gameRun = false;
-    }
+      game.game_run = false;
 
-    Object.keys(game.starships).forEach(key => {
-      if (game.starships[key].inTheSpace) {
-        game.starships[key].timer--;
-        if (game.starships[key].timer <= 0) {
-          game.starships[key].inTheSpace = false;
+      let nick = window.localStorage.getItem("nickname");
+      let gameName = window.localStorage.getItem("gameName");
+      let score = game.initial_credits;
+      let token = window.localStorage.getItem("token");
+
+      fetch('/database/addScore', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify({
+          token: token,
+          token_check: true,
+          nick: nick,
+          gameName: gameName,
+          score: score
+        }),
+      })
+        .then(response => console.log(response)); // parses JSON response into native Javascript objects
+    }
+  }
+
+  Object.keys(game.starships).forEach(key => {
+    if (game.starships[key].inTheSpace) {
+      game.starships[key].timer--;
+      if (game.starships[key].timer <= 0) {
+        game.starships[key].inTheSpace = false;
+        try {
           document.getElementById("svgMap").removeChild(document.getElementById(key));
-          document.getElementById(game.starships[key].position).setAttribute('fill', 'hotpink');
-          if (gamePopupMovingShip.open && gamePopupMovingShip.name == key) {
-            gamePopupShip.openPopup(key);
-          }
+        } catch (e) {
+          console.log("Upsik. Zrestarowałeś grę. Teraz animacji nie masz ;).")
+        }
+        document.getElementById(game.starships[key].position).setAttribute('fill', 'hotpink');
+        if (gamePopupMovingShip.open && gamePopupMovingShip.name == key) {
+          gamePopupShip.openPopup(key);
         }
       }
-    })
-  }
+    }
+  })
 }
 
 
@@ -707,6 +738,8 @@ function updateAll(onClick: boolean, game: Game) {
       }
     }
   });
+  window.localStorage.removeItem("game");
+  window.localStorage.setItem("game", JSON.stringify(game));
 }
 
 // Every 1 sec updateLeft everything
@@ -718,6 +751,7 @@ function oneSecUpdate(game: Game): void {
 }
 
 function dzik(game: Game): void {
+  console.log(JSON.stringify(game));
   gameTrick = game;
   console.log(game);
 
@@ -740,12 +774,24 @@ function dzik(game: Game): void {
   oneSecUpdate(game);
 }
 
-fetch("/home/rychh/Desktop/AW_GRA/json/game.json")
-  .then(function (resp) {
-    return resp.json();
-  }).then(function (json) {
-  return json as Game;
-}).then(dzik);
+let localGameString = window.localStorage.getItem("game");
+console.log(localGameString);
+console.log(localGameString == null);
+console.log(JSON.parse(localGameString));
+
+if (localGameString == null) {
+  fetch("/json/game.json")///home/rychh/Desktop/AW_GRA/
+    .then(function (resp) {
+      return resp.json();
+    }).then(function (json) {
+    window.localStorage.setItem("game", json);
+    return json as Game;
+  }).then(dzik);
+} else {
+  let localGame = JSON.parse(localGameString) as Game;
+  dzik(localGame);
+}
+
 
 function goToIndex() {
   window.location.href = "index.html";
@@ -763,7 +809,7 @@ function addAnimation(ship: Ship, shipName: string, planet: Planet, time: number
   let animation = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
   animation.setAttribute("path",
     "M" + 3 * ship.x + " " + 3 * ship.y + "  L" + 3 * planet.x + " " + 3 * planet.y);
-  animation.setAttribute("begin", gameMain.time + "s");
+  animation.setAttribute("begin", pageTime + "s");
 
   animation.setAttribute("dur", time + "s");
   animation.setAttribute("rotate", "auto");
@@ -820,7 +866,7 @@ function changeValue(planet: Planet, ship: Ship, items: string[], balance: numbe
 function checker() {
   let balance: number[] = [];
   let money: number = 0;
-  let correctActrion: boolean = gameRun;
+  let correctActrion: boolean = gameTrick.game_run;
   let ship: Ship = gameTrick.starships[gamePopupShip.name];
   let planet: Planet = gameTrick.planets[ship.position];
   let x;
@@ -871,7 +917,7 @@ class PlanetClass implements Planet {
 class ItemShipClass implements ItemShip {
   available: number;
 
-  constructor(available : number) {
+  constructor(available: number) {
     this.available = available;
   }
 }
@@ -891,8 +937,8 @@ class ShipClass implements Ship {
   constructor(item: string, position: string) {
     this.x = 0;
     this.y = 0;
-    this.timer= 0;
-    this.inTheSpace =false;
+    this.timer = 0;
+    this.inTheSpace = false;
     this.position = "";
     this.cargo_hold_size = 0;
     this.current_capacity = 0;
@@ -1011,7 +1057,7 @@ class TestBrakZiemniakow extends LogicalTest {
       if (this.ship.items[item].available != 0)
         throw new Error("Ilość przedmiotów sie nie zgadza");
 
-      if(this.ship.current_capacity != 0)
+      if (this.ship.current_capacity != 0)
         throw new Error("Statek nie powinien nic miec");
 
       if (this.planet.available_items[item].available == 0)
@@ -1022,7 +1068,6 @@ class TestBrakZiemniakow extends LogicalTest {
     }
   }
 }
-
 
 
 class TestBrakHajsow extends LogicalTest {
@@ -1089,7 +1134,7 @@ let testZiemniak = new TestBrakZiemniakow();
 let testBrakHajsu = new TestBrakHajsow();
 
 function testowanko() {
-  for(let i = 1; i <= testNextId; i++)
+  for (let i = 1; i <= testNextId; i++)
     tests[i].start();
 }
 

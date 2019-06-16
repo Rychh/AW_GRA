@@ -6,12 +6,24 @@
   <title>CTS Menu</title>
 </head>
 <body>
+
+<script>
+  $(document).ready(function () {
+    $("#wyloguj").click(function () {
+      $("#new_game_button").hide();
+    });
+    $("#zaloguj").click(function () {
+      $("#new_game_button").show();
+    });
+  });
+</script>
+
 <div class="lightbox" id="popup_name">
   <figure>
     <a href="#" class="close"></a>
     <figcaption>
       <h2>What's your cosmos trading name?</h2>
-      <input type="text" id="nickname" name="nick" value="Nick">
+      <input type="text" id="nickname" name="nick" value="Nick" maxlength="255">
       <button onclick="saveNickname()" id="submitButton">Submit</button>
     </figcaption>
   </figure>
@@ -26,23 +38,43 @@
       </select>
       <div id="map_description">
       </div>
+      <button onclick="copyToClipboard()">Copy Map</button>
+
+    </figcaption>
+  </figure>
+</div>
+
+
+<div class="lightbox" id="popup_add">
+  <figure>
+    <a href="#" class="close"></a>
+    <figcaption id="add_map_div">
+      <h2>Add map</h2>
+        Game name: <input id="add_map_game_name" type="text" name="gameName" maxlength="255">
+        Description: <input id="add_map_description" type="text" name="description" maxlength="255">
+        JSON: <input input id="add_map_state" type="text" name="state" maxlength="65535">
+      <button onclick="addMap()"> Add Map</button>
+      <p id="add_map_info"></p>
     </figcaption>
   </figure>
 </div>
 
 <div class="cointeiner">
   <header class="header">
-    <h1>Welcome to
+    <h1 onclick="a()">Welcome to
       <strong>Space Trade Contest</strong>
     </h1>
-    <div class="logo">
-      <img src="img/logo.jpg" alt="logo">
+    <div class="fb_jpeg">
+      <img src="img/fb.png" alt="logo" onclick="FB.login()" onlogin="checkLoginState();">
     </div>
+    <button id="zaloguj" onclick="zaloguj()">Zaloguj</button>
+    <button id="wyloguj" onclick="wyloguj()">Wyloguj</button>
   </header>
 
   <main class="main">
-    <a class="button" href="#popup_name"> New Game</a>
-    <a class="button" href="#popup_map"> Chose Map</a>
+    <a id="new_game_button" class="button" href="#popup_name">New Game</a>
+    <a id="choose_map_button" class="button" href="#popup_map">Choose Map</a>
+    <a id="add_map_button" class="button" href="#popup_add">Add Map</a>
     <h4 id="map_name"> Map_name</h4>
     <h4>Best Score</h4>
     <table>
@@ -57,8 +89,9 @@
       </tbody>
     </table>
   </main>
-  <footer class="footer">
+  <footer class="footer" onclick="FB.logout()">
     made by mr394723
+    <button id="share-button" type="button">Share</button>
   </footer>
 </div>
 <script src="ts/index.js"></script>
